@@ -36,7 +36,7 @@ client.on('ready', function() {
 Send a message to another Muttrer.
 
 ```js
-client.send(['someone@muttr.me'], 'o hai thar d00d', function(err, info.hash) {
+client.send(['someone@muttr.me'], 'o hai thar d00d', function(err, info) {
   if (err) {
     return console.error(err);
   }
