@@ -1,0 +1,37 @@
+{
+  "name": "libmuttr",
+  "version": "0.0.0",
+  "description": "tools for communicating over the muttr network",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muttr/libmuttr.git"
+  },
+  "keywords": [
+    "muttr",
+    "p2p",
+    "dht",
+    "messaging"
+  ],
+  "author": "Gordon Hall <gordon@gordonwritescode.com>",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/muttr/libmuttr/issues"
+  },
+  "homepage": "https://github.com/muttr/libmuttr",
+  "dependencies": {
+    "async": "^0.9.0",
+    "kad": "^0.2.0",
+    "nat-upnp": "git://github.com/indutny/node-nat-upnp#ae7724a",
+    "openpgp": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "istanbul": "^0.3.13",
+    "mocha": "^2.2.4",
+    "sinon": "^1.14.1"
+  }
+}
