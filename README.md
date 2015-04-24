@@ -19,7 +19,7 @@ var session = new muttr.Session(identity);
 
 session.on('ready', function() {
 
-  session.getConversations(function(err, convos) {
+  session.getConversationList(function(err, convos) {
     // get conversation list
   });
 
