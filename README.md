@@ -1,4 +1,4 @@
-LibMuttr
+Muttr
 ========
 
 [![Build Status](https://travis-ci.org/muttr/libmuttr.svg)](https://travis-ci.org/muttr/libmuttr)
@@ -9,23 +9,22 @@ Tools for communicating over the Muttr network.
 ## Usage
 
 ```bash
-npm install libmuttr --save
+npm install muttr --save
 ```
 
 ```js
 var muttr = require('libmuttr');
+var identity = new muttr.Identity('gordon@muttr.me', passphrase, pgpKeyPair);
+var session = muttr.createSession(identity);
 
-muttr.createIdentity('gordon@muttr.me', passphrase, function(err, identity) {
+session.on('ready', function() {
 
-  var client = muttr.createClient(identity);
-  var connection = muttr.createConnection('muttr.me', 44678);
-
-  connection.on('connect', function() {
-    // ready to publish messages to the network
+  session.getConversations(function(err, convos) {
+    // get conversation list
   });
 
-  client.getConversations(function(err, convos) {
-    // load conversation pointers from pod
+  session.sendMessage([someone@muttr.me], function(err, hash) {
+    // store message in the muttr network and notify recipients
   });
 
 });
@@ -72,3 +71,7 @@ Acts as an RPC client for communicating with MuttrPods.
 ### Class: Connection
 
 Facilitates connection the the Muttr network's DHT.
+
+### Class: Session
+
+Handles Muttr network connection and pod communication.

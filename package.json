@@ -1,5 +1,5 @@
 {
-  "name": "libmuttr",
+  "name": "muttr",
   "version": "0.0.0",
   "description": "tools for communicating over the muttr network",
   "main": "index.js",
