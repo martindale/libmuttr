@@ -71,6 +71,18 @@ Acts as an RPC client for communicating with MuttrPods.
 
 Facilitates connection the the Muttr network's DHT.
 
+#### get(key, callback)
+
+Fetches the PGP message from the network by it's hash.
+
+#### set(key, value, callback)
+
+Validates and broadcasts the PGP message across the DHT.
+
+#### open(callback)
+
+Initializes the connection the the DHT.
+
 ### Class: Session
 
 Handles Muttr network connection and pod communication.

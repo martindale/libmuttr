@@ -12,7 +12,7 @@ describe('Connection', function() {
 
   });
 
-  describe('#validateMessageKey', function() {
+  describe('#_validateMessageKey', function() {
 
 
 
