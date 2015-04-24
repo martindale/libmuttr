@@ -13,7 +13,7 @@ npm install muttr --save
 ```
 
 ```js
-var muttr = require('libmuttr');
+var muttr = require('muttr');
 var identity = new muttr.Identity('gordon@muttr.me', passphrase, pgpKeyPair);
 var session = new muttr.Session(identity);
 
