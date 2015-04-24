@@ -2,7 +2,7 @@ LibMuttr
 ========
 
 [![Build Status](https://travis-ci.org/muttr/libmuttr.svg)](https://travis-ci.org/muttr/libmuttr)
-
+[![Coverage Status](https://coveralls.io/repos/muttr/libmuttr/badge.svg)](https://coveralls.io/r/muttr/libmuttr)
 
 Tools for communicating over the Muttr network.
 
