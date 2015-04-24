@@ -15,7 +15,7 @@ npm install muttr --save
 ```js
 var muttr = require('muttr');
 var identity = new muttr.Identity('gordon@muttr.me', passphrase, pgpKeyPair);
-var session = new muttr.Session(identity);
+var session = new muttr.Session(identity, { storage: MyStorageAdapter });
 
 session.on('ready', function() {
 
