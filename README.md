@@ -23,7 +23,7 @@ session.on('ready', function() {
     // get conversation list
   });
 
-  session.sendMessage([someone@muttr.me], function(err, hash) {
+  session.sendMessage(['libby@muttr.me', 'ruby@muttr.me'], function(err, hash) {
     // store message in the muttr network and notify recipients
   });
 
