@@ -19,12 +19,11 @@ var session = new muttr.Session(identity);
 
 session.on('ready', function() {
 
-  session.getConversationList(function(err, convos) {
-    // get conversation list
-  });
+  var recipients = ['libby@muttr.me', 'ruby@muttr.me'];
+  var message = 'hey, let me tell you guys a secret!';
 
-  session.sendMessage(['libby@muttr.me', 'ruby@muttr.me'], function(err, hash) {
-    // store message in the muttr network and notify recipients
+  session.sendMessage(recipients, message, function(err, hash) {
+    // store message in the muttr network and notify recipients' pods
   });
 
 });
