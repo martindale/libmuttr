@@ -29,8 +29,10 @@ exports.createConnection = function(options) {
 /**
 * Creates and returns a new muttr.Identity
 * #createIdentity
-* @param {object} options
+* @param {string} options
 */
-exports.createIdentity = function(options) {
-  return new Identity(options);
-};
+exports.createIdentity = Identity.generate;
+
+exports.Client;
+exports.DHT;
+exports.Identity;
