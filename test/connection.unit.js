@@ -5,6 +5,7 @@ var expect = require('chai').expect;
 var pgp = require('openpgp');
 var proxyquire = require('proxyquire');
 var Connection = require('../lib/connection');
+var EventEmitter = require('events').EventEmitter;
 var crypto = require('crypto');
 var Identity = require('../lib/identity');
 
@@ -274,20 +275,28 @@ describe('Connection', function() {
 
   describe('#_joinNetwork', function() {
 
-    it.skip('should set options.address to the ip', function(done) {
-
+    var KadConnection = proxyquire('../lib/connection', {
+      kad: function() {
+        return new EventEmitter();
+      }
     });
 
-    it.skip('should create new kademlia dht instance with options', function(done) {
-
+    it('should set options.address to the ip', function(done) {
+      var conn = new KadConnection();
+      conn._joinNetwork('1.1.1.1', function(err) {
+        expect(conn.options.address).to.equal('1.1.1.1');
+        done();
+      });
+      conn.network.emit('connect');
     });
 
-    it.skip('should callback with an error on dht error event', function(done) {
-
-    });
-
-    it.skip('should callback on dht connect event', function(done) {
-
+    it('should callback with an error on dht error event', function(done) {
+      var conn = new KadConnection();
+      conn._joinNetwork('1.1.1.1', function(err) {
+        expect(err).to.be.instanceOf(Error);
+        done();
+      });
+      conn.network.emit('error', new Error());
     });
 
   });
