@@ -3,6 +3,7 @@
 var sinon = require('sinon');
 var expect = require('chai').expect;
 var pgp = require('openpgp');
+var proxyquire = require('proxyquire');
 var Connection = require('../lib/connection');
 var crypto = require('crypto');
 var Identity = require('../lib/identity');
