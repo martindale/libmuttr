@@ -3,7 +3,6 @@
 var sinon = require('sinon');
 var expect = require('chai').expect;
 var pgp = require('openpgp');
-var proxyquire = require('proxyquire');
 var Connection = require('../lib/connection');
 var crypto = require('crypto');
 var Identity = require('../lib/identity');
@@ -218,20 +217,56 @@ describe('Connection', function() {
 
   describe('#_forwardPort', function() {
 
-    it.skip('should pass on the default ip if forwardPort is false', function(done) {
-
+    it('should pass on the default ip if forwardPort is false', function(done) {
+      var conn = Connection();
+      conn._forwardPort(function(err, ip) {
+        expect(ip).to.equal(conn.options.address);
+        done();
+      });
     });
 
-    it.skip('should pass on the default ip if portMapping fails', function(done) {
-
+    it('should pass on the default ip if portMapping fails', function(done) {
+      var conn = Connection({ forwardPort: true });
+      var _natClient = sinon.stub(conn._natClient, 'portMapping', function(o, d) {
+        d(new Error());
+      });
+      conn._forwardPort(function(err, ip) {
+        expect(ip).to.equal(conn.options.address);
+        _natClient.restore();
+        done();
+      });
     });
 
-    it.skip('should pass on the default ip if externalIp fails', function(done) {
-
+    it('should pass on the default ip if externalIp fails', function(done) {
+      var conn = Connection({ forwardPort: true });
+      var _portMapping = sinon.stub(conn._natClient, 'portMapping', function(o, d) {
+        d(null);
+      });
+      var _externalIp = sinon.stub(conn._natClient, 'externalIp', function(d) {
+        d(new Error());
+      });
+      conn._forwardPort(function(err, ip) {
+        expect(ip).to.equal(conn.options.address);
+        _portMapping.restore();
+        _externalIp.restore();
+        done();
+      });
     });
 
-    it.skip('should pass on the external ip after portMapping', function(done) {
-
+    it('should pass on the external ip after portMapping', function(done) {
+      var conn = Connection({ forwardPort: true });
+      var _portMapping = sinon.stub(conn._natClient, 'portMapping', function(o, d) {
+        d(null);
+      });
+      var _externalIp = sinon.stub(conn._natClient, 'externalIp', function(d) {
+        d(null, '1.1.1.1');
+      });
+      conn._forwardPort(function(err, ip) {
+        expect(ip).to.equal('1.1.1.1');
+        _portMapping.restore();
+        _externalIp.restore();
+        done();
+      });
     });
 
   });
