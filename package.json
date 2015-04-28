@@ -25,7 +25,7 @@
   "homepage": "https://github.com/muttr/libmuttr",
   "dependencies": {
     "async": "^0.9.0",
-    "kad": "^0.2.0",
+    "kad": "^0.2.1",
     "merge": "^1.2.0",
     "nat-upnp": "git://github.com/indutny/node-nat-upnp#ae7724a",
     "openpgp": "^1.0.1",
