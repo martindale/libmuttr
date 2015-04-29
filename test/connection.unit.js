@@ -85,19 +85,22 @@ describe('Connection', function() {
     conn.network = { get: function() { } };
 
     before(function(done) {
-      identity.encrypt([], 'test', function(err, result) {
-        msg = result;
-        key = crypto.createHash('sha1').update(msg).digest('hex');
-        done();
+      identity.sign('test', function(err, message) {
+        identity.encrypt([], message, function(err, result) {
+          msg = result;
+          key = crypto.createHash('sha1').update(msg).digest('hex');
+          done();
+        });
       });
     });
 
     it('should get the value from the dht and validate it', function(done) {
       var _network = sinon.stub(conn.network, 'get', function(key, callback) {
-        callback(null, msg);
+        callback(null, new Buffer(msg, 'ascii').toString('hex'));
       });
       conn.get(key, function(err, value) {
         _network.restore();
+        expect(err).to.equal(null);
         expect(value).to.equal(msg);
         done();
       });
@@ -139,16 +142,17 @@ describe('Connection', function() {
     });
 
     before(function(done) {
-      identity.encrypt([], 'test', function(err, result) {
-        msg = result;
-        key = crypto.createHash('sha1').update(msg).digest('hex');
-        done();
+      identity.sign('test', function(err, message) {
+        identity.encrypt([], 'test', function(err, result) {
+          msg = result;
+          key = crypto.createHash('sha1').update(msg).digest('hex');
+          done();
+        });
       });
     });
 
     it('should put the value in the dht and validate it', function(done) {
       conn.put(key, msg, function(err) {
-        _network.restore();
         expect(err).to.equal(null);
         done();
       });
