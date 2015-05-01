@@ -1,6 +1,7 @@
 'use strict';
 
 var sinon = require('sinon');
+var fs = require('fs');
 var expect = require('chai').expect;
 var pgp = require('openpgp');
 var proxyquire = require('proxyquire');
@@ -11,15 +12,9 @@ var Identity = require('../lib/identity');
 
 describe('Connection', function() {
 
-  var identity;
-
-  before(function(done){
-    this.timeout(15000);
-
-    Identity.generate('muttr@test', 'secret', function(err, id) {
-      identity = id;
-      done();
-    });
+  var identity = new Identity('test@muttr', 'test', {
+    publicKey: fs.readFileSync(__dirname + '/data/testkey.pub.asc'),
+    privateKey: fs.readFileSync(__dirname + '/data/testkey.asc')
   });
 
   describe('@constructor', function() {

@@ -4,10 +4,11 @@ var expect = require('chai').expect;
 var Identity = require('../lib/identity');
 var pgp = require('openpgp');
 var async = require('async');
+var fs = require('fs');
 
 var NUMBITS = 2048;
-var PASSPHRASE = 'secret';
-var USERID = 'muttr@test';
+var PASSPHRASE = 'test';
+var USERID = 'test@muttr';
 
 var identity1;
 var identity2;
@@ -16,21 +17,11 @@ describe('Identity', function() {
 
   this.timeout(20000);
 
-  var keypair1;
+  var keypair1 = {
+    publicKeyArmored: fs.readFileSync(__dirname + '/data/testkey.pub.asc'),
+    privateKeyArmored: fs.readFileSync(__dirname + '/data/testkey.asc')
+  };
   var keypair2;
-
-  before(function(done) {
-    pgp.generateKeyPair({
-      numBits: NUMBITS,
-      passphrase: PASSPHRASE,
-      userId: USERID
-    }).then(function(result) {
-      keypair1 = result;
-      done();
-    }).catch(function(err) {
-      done(err);
-    });
-  });
 
   describe('@constructor', function() {
 
