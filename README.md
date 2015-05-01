@@ -12,22 +12,7 @@ Tools for communicating over the Muttr network.
 npm install muttr --save
 ```
 
-```js
-var muttr = require('muttr');
-var identity = new muttr.Identity('gordon@muttr.me', passphrase, pgpKeyPair);
-var session = new muttr.Session(identity, { storage: MyStorageAdapter });
-
-session.on('ready', function() {
-
-  var recipients = ['libby@muttr.me', 'ruby@muttr.me'];
-  var message = 'hey, let me tell you guys a secret!';
-
-  session.sendMessage(recipients, message, function(err, hash) {
-    // store message in the muttr network and notify recipients' pods
-  });
-
-});
-```
+> Sample code coming soon...
 
 ## Reference
 
