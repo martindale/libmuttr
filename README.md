@@ -44,6 +44,14 @@ Signs the given message with your private key and passes it to the callback.
 Verifies the signature on the given message against the given public key and
 passes the plaintext message to the callback.
 
+#### getPubKeyHash()
+
+Returns the SHA1 hash of the public key.
+
+#### getPubKeyHref()
+
+Returns the URL for fetching the public key.
+
 #### serialize()
 
 Returns a JSON string containing your public key and user ID.
