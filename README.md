@@ -60,6 +60,42 @@ Returns a JSON string containing your public key and user ID.
 
 Acts as an RPC client for communicating with MuttrPods.
 
+#### registerIdentity(callback)
+
+Registers the identity with it's defined MuttrPod.
+
+#### getPublicKeyForUserID(userID, callback)
+
+Parses the alias and host from the given userID and fetches the public key.
+
+#### requestStoreMessage(message)
+
+Asks the MuttrPod to store message in network on the client's behalf.
+
+#### requestFindMessage(key, callback)
+
+Asks the MuttrPod to retrieve a message from the network on the client's behalf.
+
+#### sendMessageKey(userID, key, callback)
+
+Notify the userID of a stored message for them to retrieve.
+
+#### createAlias(alias, callback)
+
+Registers a new alias the given identity may be associated with.
+
+#### createToken(method, resource, callback)
+
+Create a one-time-use auth token for GET/DELETE requests to the MuttrPod.
+
+#### getConversations(token, callback)
+
+Get all messages keys by contact from the MuttrPod.
+
+#### purgeConversationHistory(token, callback)
+
+Delete all message keys from the MuttrPod.
+
 ### Class: Connection
 
 Facilitates connection the the Muttr network's DHT.
