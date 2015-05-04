@@ -12,7 +12,37 @@ Tools for communicating over the Muttr network.
 npm install muttr --save
 ```
 
-> Sample code coming soon...
+```js
+// import libraries
+var muttr = require('muttr');
+var levelup = require('levelup');
+
+// alias common constructors
+var Identity = muttr.Identity;
+var Connection = muttr.Connection;
+var Session = muttr.Session;
+
+// load user's pgp key pair
+var user = new Identity('user@muttr.me', 'passphrase', {
+  privateKey: fs.readFileSync('path/to/private.key.asc'),
+  publicKey: fs.readFileSync('path/to/public.key.asc')
+});
+
+// connect to the muttr network
+var network = new Connection({
+  forwardPort: true,
+  seeds: [{ address: 'muttr.me', port: 44678 }],
+  storage: levelup('path/to/network/storage.db')
+});
+
+// create a session for the user
+var app = new Session(user, network, {
+  storage: levelup('path/to/app/storage.db')
+});
+
+// now you can send a message to a friend
+app.send(['friend@muttr.me'], 'howdy, partner!');
+```
 
 ## Reference
 
