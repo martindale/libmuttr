@@ -8,41 +8,57 @@ Tools for communicating over the Muttr network.
 
 ## Usage
 
+Install the Muttr library using NPM.
+
 ```bash
 npm install muttr --save
 ```
 
+Import your program's required modules.
+
 ```js
-// import libraries
 var muttr = require('muttr');
 var levelup = require('levelup');
+```
 
-// alias common constructors
-var Identity = muttr.Identity;
-var Connection = muttr.Connection;
-var Session = muttr.Session;
+Load the user's PGP key pair.
 
-// load user's pgp key pair
-var user = new Identity('user@muttr.me', 'passphrase', {
+```js
+var user = new muttr.Identity('user@muttr.me', 'passphrase', {
   privateKey: fs.readFileSync('path/to/private.key.asc'),
   publicKey: fs.readFileSync('path/to/public.key.asc')
 });
+```
 
-// connect to the muttr network
-var network = new Connection({
+Connect to the P2P Muttr network's DHT.
+
+```js
+var network = new muttr.Connection({
   forwardPort: true,
   seeds: [{ address: 'muttr.me', port: 44678 }],
   storage: levelup('path/to/network/storage.db')
 });
+```
 
-// create a session for the user
-var app = new Session(user, network, {
-  storage: levelup('path/to/app/storage.db')
+Create a new Session for the user and party!
+
+```js
+var app = new muttr.Session(user, network);
+
+// pull any messages missed off the user's pod
+app.playback(function(err, messages, purge) {
+  console.log('Storing %d missed messages...', messages.length);
+  purge(); // delete from remote
 });
 
 // now you can send a message to a friend
-app.send(['friend@muttr.me'], 'howdy, partner!', function(err, key) {
-  console.info('Message %s sent!', key);
+app.send('friend@muttr.me', 'howdy, partner!', function(err, message) {
+  console.log('Message %s sent!', message.key);
+});
+
+// and get notified when you receive a message
+app.on('message', function(msg) {
+  console.log('Message received from %s: %s', msg.sender.userID, msg.text);
 });
 ```
 

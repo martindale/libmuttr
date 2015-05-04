@@ -36,6 +36,12 @@ describe('Client', function() {
 
   });
 
+  describe('#subscribe', function() {
+
+
+
+  });
+
   describe('#registerIdentity', function() {
 
     it('should post the signed pubkey', function(done) {
@@ -217,14 +223,14 @@ describe('Client', function() {
 
   });
 
-  describe('#getConversations', function() {
+  describe('#getMissedMessages', function() {
 
     it('should get the conversation list using token', function(done) {
       nock('https://muttr').get('/chats?token=1234567890').reply(200, {
         status: 'success',
         conversations: {}
       });
-      Client(identity).getConversations('1234567890', function(err, result) {
+      Client(identity).getMissedMessages('1234567890', function(err, result) {
         expect(err).to.equal(null);
         expect(result.conversations).to.be.ok;
         done();
@@ -233,14 +239,14 @@ describe('Client', function() {
 
   });
 
-  describe('#purgeConversationHistory', function() {
+  describe('#purgeMessageHistory', function() {
 
     it('should delete the conversation list using token', function(done) {
       nock('https://muttr').delete('/chats?token=1234567890').reply(200, {
         status: 'success',
         conversations: {}
       });
-      Client(identity).purgeConversationHistory('1234567890', function(err, result) {
+      Client(identity).purgeMessageHistory('1234567890', function(err, result) {
         expect(err).to.equal(null);
         expect(result.conversations).to.be.ok;
         done();
@@ -283,6 +289,18 @@ describe('Client', function() {
       });
       handler(null, { statusCode: 200 }, '{ "value": "hello" }');
     });
+
+  });
+
+  describe('#_proxyMessageEvent', function() {
+
+
+
+  });
+
+  describe('#_websocketHandshake', function() {
+
+
 
   });
 
