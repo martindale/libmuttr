@@ -41,7 +41,9 @@ var app = new Session(user, network, {
 });
 
 // now you can send a message to a friend
-app.send(['friend@muttr.me'], 'howdy, partner!');
+app.send(['friend@muttr.me'], 'howdy, partner!', function(err, key) {
+  console.info('Message %s sent!', key);
+});
 ```
 
 ## Reference
