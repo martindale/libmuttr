@@ -136,11 +136,11 @@ Registers a new alias the given identity may be associated with.
 
 Create a one-time-use auth token for GET/DELETE requests to the MuttrPod.
 
-#### getConversations(token, callback)
+#### getInboxes(token, callback)
 
 Get all messages keys by contact from the MuttrPod.
 
-#### purgeConversationHistory(token, callback)
+#### purgeInboxes(token, callback)
 
 Delete all message keys from the MuttrPod.
 
