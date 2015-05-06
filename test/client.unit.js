@@ -115,7 +115,7 @@ describe('Client', function() {
   describe('#sendMessageKey', function() {
 
     it('should post the message key', function(done) {
-      nock('https://muttr').post('/chats').reply(200, {
+      nock('https://muttr').post('/inboxes/someone').reply(200, {
         message: {
           recipient: {
             userID: 'someone@muttr',
@@ -223,32 +223,30 @@ describe('Client', function() {
 
   });
 
-  describe('#getMissedMessages', function() {
+  describe('#getInboxes', function() {
 
     it('should get the conversation list using token', function(done) {
-      nock('https://muttr').get('/chats?token=1234567890').reply(200, {
+      nock('https://muttr').get('/inboxes?token=1234567890').reply(200, {
         status: 'success',
-        conversations: {}
+        inboxes: []
       });
-      Client(identity).getMissedMessages('1234567890', function(err, result) {
+      Client(identity).getInboxes('1234567890', function(err, result) {
         expect(err).to.equal(null);
-        expect(result.conversations).to.be.ok;
         done();
       });
     });
 
   });
 
-  describe('#purgeMessageHistory', function() {
+  describe('#purgeInboxes', function() {
 
     it('should delete the conversation list using token', function(done) {
-      nock('https://muttr').delete('/chats?token=1234567890').reply(200, {
+      nock('https://muttr').delete('/inboxes?token=1234567890').reply(200, {
         status: 'success',
-        conversations: {}
+        inboxes: []
       });
-      Client(identity).purgeMessageHistory('1234567890', function(err, result) {
+      Client(identity).purgeInboxes('1234567890', function(err, result) {
         expect(err).to.equal(null);
-        expect(result.conversations).to.be.ok;
         done();
       });
     });
