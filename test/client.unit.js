@@ -59,15 +59,6 @@ describe('Client', function() {
       });
     });
 
-    it('should error if signing failed', function(done) {
-      var _sign = sinon.stub(identity, 'sign').callsArgWith(1, new Error('Fail'));
-      Client(identity).registerIdentity(function(err, result) {
-        expect(err.message).to.equal('Fail');
-        _sign.restore();
-        done();
-      });
-    });
-
   });
 
   describe('#getPublicKeyForUserID', function() {
