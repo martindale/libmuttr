@@ -295,13 +295,6 @@ describe('Client', function() {
 
   describe('#_createPayload', function() {
 
-    it('should error if no data supplied', function(done) {
-      Client(identity)._createPayload('https://muttr', {}, function(err, data) {
-        expect(err.message).to.equal('Invalid data object supplied');
-        done();
-      });
-    });
-
     it('should use pubkeyhash for identityType', function(done) {
       var _getpkhash = sinon.stub(identity, 'getPubKeyHash');
       Client(identity)._createPayload('https://muttr', { test: true }, function(err, pl) {
