@@ -27,7 +27,7 @@
     "async": "^0.9.0",
     "kad": "^0.2.2",
     "merge": "^1.2.0",
-    "nat-upnp": "git://github.com/indutny/node-nat-upnp#ae7724a",
+    "nat-upnp": "git://github.com/indutny/node-nat-upnp",
     "openpgp": "^1.0.1",
     "request": "^2.55.0",
     "ws": "^0.7.1"
