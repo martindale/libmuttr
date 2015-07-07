@@ -1,6 +1,6 @@
 {
   "name": "muttr",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "tools for communicating over the muttr network",
   "main": "index.js",
   "scripts": {
